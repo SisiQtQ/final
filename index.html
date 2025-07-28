@@ -2,68 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome – NDA Signing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Visitor NDA</title>
   <style>
-    @font-face {
-      font-family: 'Brockmann';
-      src: url('Brockmann-Regular.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     body {
-      background-color: #001A24;
+      margin: 0;
+      font-family: sans-serif;
+      background-color: black;
       color: white;
-      font-family: 'Brockmann', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
-      text-align: center;
-      padding: 0 20px;
+      overflow: hidden;
     }
-
-    img {
-      max-width: 220px;
-      margin-bottom: 30px;
+    #intro, #form-container {
+      opacity: 0;
+      transition: opacity 1s ease;
     }
-
-    h1 {
-      font-size: 28px;
-      font-weight: normal;
-      margin-bottom: 10px;
+    #intro.active, #form-container.active {
+      opacity: 1;
     }
-
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
+    #begin-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
     }
-
-    a.button {
-      display: inline-block;
-      padding: 14px 24px;
-      background-color: #00C2FF;
-      color: #001A24;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: background-color 0.3s ease;
+    #form-container {
+      width: 100%;
+      height: 100vh;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-
-    a.button:hover {
-      background-color: #00a9da;
+    iframe {
+      width: 100%;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <img src="quinteq-logo.png" alt="QuinteQ Logo" />
-  <h1>Welcome to the QuinteQ office</h1>
-  <p>You’re about to see some things we’re really proud of.</p>
-  <p>We’re excited to welcome you in.</p>
-  <p>Before we get started, please sign a quick NDA — just to help protect what makes it special.</p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSez-mT7452Wn0l7cvbzp8D7OuOGtQyuCHmghA4pM4hzpvDxmA/viewform?usp=header" class="button">Sign NDA</a>
+
+  <div id="intro" class="active">
+    <h1>Welcome Visitor</h1>
+    <button id="begin-btn">Begin</button>
+  </div>
+
+  <div id="form-container">
+    <iframe
+      id="JotFormIFrame-252082893900055"
+      title="QuinteQ Visitor NDA"
+      onload="window.parent.scrollTo(0,0)"
+      allowtransparency="true"
+      allow="geolocation; microphone; camera; fullscreen; payment"
+      src="https://form.jotform.com/252082893900055"
+      frameborder="0"
+      style="min-width:100%;max-width:100%;height:539px;border:none;"
+      scrolling="no"
+    >
+    </iframe>
+  </div>
+
+  <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+  <script>
+    window.jotformEmbedHandler("iframe[id='JotFormIFrame-252082893900055']", "https://form.jotform.com/");
+
+    const intro = document.getElementById('intro');
+    const formContainer = document.getElementById('form-container');
+    const button = document.getElementById('begin-btn');
+
+    button.addEventListener('click', () => {
+      intro.classList.remove('active');
+      setTimeout(() => {
+        intro.style.display = 'none';
+        formContainer.style.display = 'flex';
+        setTimeout(() => {
+          formContainer.classList.add('active');
+        }, 50);
+      }, 1000);
+    });
+  </script>
+
 </body>
 </html>
