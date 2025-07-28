@@ -2,91 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visitor NDA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome – NDA Signing</title>
   <style>
+    @font-face {
+      font-family: 'Brockmann';
+      src: url('Brockmann-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: black;
+      background-color: #001A24;
       color: white;
+      font-family: 'Brockmann', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
+      margin: 0;
+      text-align: center;
+      padding: 0 20px;
     }
-    #intro, #form-container {
-      opacity: 0;
-      transition: opacity 1s ease;
+
+    img {
+      max-width: 220px;
+      margin-bottom: 30px;
     }
-    #intro.active, #form-container.active {
-      opacity: 1;
+
+    h1 {
+      font-size: 28px;
+      font-weight: normal;
+      margin-bottom: 10px;
     }
-    #begin-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: white;
-      color: black;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
     }
-    #form-container {
-      width: 100%;
-      height: 100vh;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+
     iframe {
       width: 100%;
+      max-width: 600px;
+      height: 700px;
       border: none;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-
-  <div id="intro" class="active">
-    <h1>Welcome Visitor</h1>
-    <button id="begin-btn">Begin</button>
-  </div>
-
-  <div id="form-container">
-    <iframe
-      id="JotFormIFrame-252082893900055"
-      title="QuinteQ Visitor NDA"
-      onload="window.parent.scrollTo(0,0)"
-      allowtransparency="true"
-      allow="geolocation; microphone; camera; fullscreen; payment"
-      src="https://form.jotform.com/252082893900055"
-      frameborder="0"
-      style="min-width:100%;max-width:100%;height:539px;border:none;"
-      scrolling="no"
-    ></iframe>
-  </div>
-
-  <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
-  <script>
-    window.jotformEmbedHandler("iframe[id='JotFormIFrame-252082893900055']", "https://form.jotform.com/");
-
-    const intro = document.getElementById('intro');
-    const formContainer = document.getElementById('form-container');
-    const button = document.getElementById('begin-btn');
-
-    button.addEventListener('click', () => {
-      intro.classList.remove('active');
-      setTimeout(() => {
-        intro.style.display = 'none';
-        formContainer.style.display = 'flex';
-        setTimeout(() => {
-          formContainer.classList.add('active');
-        }, 50);
-      }, 1000);
-    });
-  </script>
-
-</body>
-</html>
