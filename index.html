@@ -87,18 +87,18 @@
     <h1>Welcome to the QuinteQ office</h1>
     <p>You’re about to see some things we’re really proud of.</p>
     <p>We’re excited to welcome you in.</p>
-    <p>Before we get started, please sign a quick NDA — just to help protect what makes it special.</p>
+    <p>Before we get started, please sign a quick NDA — just to help protect what makes us special.</p>
     <button class="button" onclick="showForm()">Sign the NDA</button>
   </div>
 
   <div id="form-container">
     <iframe
-      id="JotFormIFrame-252083404191046"
+      id="JotFormIFrame-252302259466053"
       title="NDA"
-      onload="window.parent.scrollTo(0,0)"
+      onload="checkForThankYouPage()"
       allowtransparency="true"
       allow="geolocation; microphone; camera; fullscreen; payment"
-      src="https://form.jotform.com/252083404191046"
+      src="https://form.jotform.com/252302259466053"
       frameborder="0"
       scrolling="no"
     ></iframe>
@@ -107,13 +107,30 @@
   <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
   <script>
     window.jotformEmbedHandler(
-      "iframe[id='JotFormIFrame-252083404191046']",
+      "iframe[id='JotFormIFrame-252302259466053']",
       "https://form.jotform.com/"
     );
 
     function showForm() {
       document.getElementById('welcome-screen').style.display = 'none';
       document.getElementById('form-container').style.display = 'block';
+    }
+
+    function checkForThankYouPage() {
+      const iframe = document.getElementById('JotFormIFrame-252302259466053');
+      const thankYouUrl = "https://submit.jotform.com/submit/252302259466053/thankyou";
+
+      iframe.contentWindow.addEventListener("load", function () {
+        try {
+          const currentUrl = iframe.contentWindow.location.href;
+          if (currentUrl.includes("thankyou")) {
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('welcome-screen').style.display = 'flex';
+          }
+        } catch (e) {
+          // May throw a cross-origin warning on some browsers – safe to ignore
+        }
+      });
     }
   </script>
 
